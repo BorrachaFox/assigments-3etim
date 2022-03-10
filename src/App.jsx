@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
-import api from './services/api'
+import api from './services/api';
 
 import styled, { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyles } from './themes';
+
+import { Card } from './components/card';
 
 const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100vw;
   
   color: ${(props) => props.theme.fontColor};
+
+  h1 {
+    margin: 20px 0;
+  }
+
 `;
 
 function App() {
@@ -35,13 +43,12 @@ function App() {
       <GlobalStyles/>
       <StyledApp>
         <h1>Tarefas</h1>
-        <div className='assigment-list'>
+        <div className='assigment-list' style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80vw'}}>
           {assigments?.map((assigment) => 
-            <div key={assigment}>
-              <p>title: {assigment.title}</p>
-              <p>description: {assigment.description}</p>
-              <hr/>
-            </div>
+            <Card 
+              key={assigment._id}
+              data={assigment}
+            />
           )}
         </div>
       </StyledApp>
