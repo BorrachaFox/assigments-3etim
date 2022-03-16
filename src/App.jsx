@@ -1,58 +1,41 @@
-import { useEffect, useState } from 'react';
-import api from './services/api';
+import { useState } from 'react';
+
+import Context from './providers/Context';
 
 import styled, { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme, GlobalStyles } from './themes';
+import lightTheme from './styles/themes/light';
+import darkTheme from './styles/themes/dark';
 
-import { Card } from './components/card';
+import { GlobalStyles } from './styles/global';
+
+import { AssigmentList } from './components/AssigmentList'
+import { FormCard } from './components/FormCard';
+import { Header } from './components/Header';
 
 const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   
-  color: ${(props) => props.theme.fontColor};
-
-  h1 {
-    margin: 20px 0;
-  }
-
+  color: ${(props) => props.theme.text};
 `;
 
 function App() {
-  const [theme, setTheme] = useState('dark');
-  const [assigments, setAssigiments] = useState([]);
+  const [theme, setTheme] = useState('light');
+  const [renderView, setRenderView] = useState(1);
 
-  const themeToggler = () => {
-    theme === "light" ? setTheme('dark') : setTheme('light');
-  }
-
-  useEffect(() => {
-    api.get('/').then(({data}) => {
-      setAssigiments(data)
-      console.log(data)
-    })
-    .catch((err) => {
-      console.error("ops! ocorreu um erro" + err);
-    });
-  }, [])
-  
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyles/>
-      <StyledApp>
-        <h1>Tarefas</h1>
-        <div className='assigment-list' style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80vw'}}>
-          {assigments?.map((assigment) => 
-            <Card 
-              key={assigment._id}
-              data={assigment}
-            />
-          )}
-        </div>
-      </StyledApp>
-    </ThemeProvider>
+    <Context.Provider value={[theme, setTheme]}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles/>
+        <StyledApp>
+          <Header title="Tarefas"/>
+          {renderView === 1 && <AssigmentList/>}
+          {renderView === 2 && <FormCard/>}
+        </StyledApp>
+      </ThemeProvider>
+    </Context.Provider>
   )
 }
 
