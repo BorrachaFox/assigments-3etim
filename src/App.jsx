@@ -2,24 +2,15 @@ import { useState } from 'react';
 
 import Context from './providers/Context';
 
-import styled, { ThemeProvider } from 'styled-components';
+import { StyledApp } from './style'
+import { ThemeProvider } from 'styled-components';
 import lightTheme from './styles/themes/light';
 import darkTheme from './styles/themes/dark';
 
 import { GlobalStyles } from './styles/global';
-
 import { AssigmentList } from './components/AssigmentList'
 import { FormCard } from './components/FormCard';
 import { Header } from './components/Header';
-
-const StyledApp = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  
-  color: ${(props) => props.theme.text};
-`;
 
 function App() {
   const [theme, setTheme] = useState('light');
