@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
 import { v4 as uuid } from 'uuid';
+import { db } from '../../firebase-config';
+import { collection, getDocs } from 'firebase/firestore'
 
 import { Card } from '../Card'
-import api from '../../services/api';
 
 import { AssigmentListDiv, Header } from './style';
 
 export const AssigmentList = () => {
   
   const [assigments, setAssigiments] = useState([]);
-
+  const assigmentsCollectionRef = collection(db, "assigments")
   useEffect(() => {
-    api.get('/').then(({data}) => {
-      setAssigiments(data);
-      console.log(data);
-    })
-    .catch((err) => {
-      console.error("ops! ocorreu um erro" + err);
-    });
+    const getAssigments = async () => {
+      const data = await getDocs(assigmentsCollectionRef);
+      setAssigiments(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+      console.log(assigments);
+    };
+
+    getAssigments();
   }, [])
 
   return(

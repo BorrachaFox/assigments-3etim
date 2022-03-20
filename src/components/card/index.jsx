@@ -6,13 +6,13 @@ export const Card = (props) => {
   /* props.data.date */
   const [isOpen, setIsOpen] = useState(false)
 
-  const assigmentDate = dateFormat(props.data.date, "dd/mm")
+  const dateTimestamp = new Date(props.data.date.seconds * 1000);
+  const deliveryDate = dateFormat(dateTimestamp, "dd/mm");
 
   return (
     <CardDiv 
       className="assigment-card" 
       id={props.id} 
-
       onClick={() => isOpen ? setIsOpen(false): setIsOpen(true)}
     >
         <CardHeader>
@@ -20,12 +20,12 @@ export const Card = (props) => {
         </CardHeader>
 
         {isOpen && <div className='description'>
-          <p>{ props.data.description }</p>
+          <p>{ props.data.description || 'No description 😥' }</p>
         </div>}
 
         <CardFooter>
           <p>{ props.data.subject }</p>
-          <p className='date'>{ assigmentDate }</p>
+          <p className='date'>{ deliveryDate }</p> 
         </CardFooter>
     </CardDiv>
   )
