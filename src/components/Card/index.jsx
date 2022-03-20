@@ -4,9 +4,12 @@ import { CardDiv, CardHeader, CardFooter } from './style'
 
 export const Card = (props) => {
   const [isOpen, setIsOpen] = useState(false)
+  let deliveryDate;
 
-  const dateTimestamp = new Date(props.data.date.seconds * 1000);
-  const deliveryDate = dateFormat(dateTimestamp, "dd/mm");
+  if (props.data.date) {
+    const dateTimestamp = new Date(props.data.date.seconds * 1000);
+    deliveryDate = dateFormat(dateTimestamp, "dd/mm");
+  } 
 
   return (
     <CardDiv 
@@ -23,7 +26,7 @@ export const Card = (props) => {
 
         <CardFooter>
           <p>{ props.data.subject }</p>
-          <p className='date'>{ deliveryDate }</p> 
+          <p className='date'>{ deliveryDate || 'Por Grupo' }</p> 
         </CardFooter>
     </CardDiv>
   )
