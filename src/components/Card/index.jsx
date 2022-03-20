@@ -26,7 +26,7 @@ export const Card = (props) => {
 
         <CardFooter>
           <p>{ props.data.subject }</p>
-          <p className='date'>{ deliveryDate || 'Por Grupo' }</p> 
+          <p className='date'>{ deliveryDate || props.data.delivery || 'Por Grupo' }</p> 
         </CardFooter>
     </CardDiv>
   )
