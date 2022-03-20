@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { v4 as uuid } from 'uuid';
 import { db } from '../../firebase-config';
 import { collection, getDocs } from 'firebase/firestore'
 
@@ -29,9 +28,8 @@ export const AssigmentList = () => {
 
       {assigments?.map((assigment) => 
         <Card
-          key={assigment._id}
+          key={assigment.id}
           data={assigment}
-          id={`card-id-${uuid()}`}
         />
       )}
     </AssigmentListDiv>

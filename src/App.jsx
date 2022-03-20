@@ -9,7 +9,6 @@ import darkTheme from './styles/themes/dark';
 
 import { GlobalStyles } from './styles/global';
 import { AssigmentList } from './components/AssigmentList'
-import { FormCard } from './components/FormCard';
 import { Header } from './components/Header';
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
         <StyledApp>
           <Header title="Tarefas"/>
           {renderView === 1 && <AssigmentList/>}
-          {renderView === 2 && <FormCard/>}
         </StyledApp>
       </ThemeProvider>
     </Context.Provider>
