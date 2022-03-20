@@ -1,6 +1,6 @@
 import { HeaderDiv } from './style';
 
-import Context from '../../providers/context/ThemeContext';
+import Context from '../../providers/Context';
 import { useContext } from 'react';
 
 export const Header = (props) => {
