@@ -1,6 +1,6 @@
 import { HeaderDiv } from './style';
 
-import Context from '../../providers/Context';
+import Context from '../../providers/context/ThemeContext';
 import { useContext } from 'react';
 
 export const Header = (props) => {
@@ -12,7 +12,7 @@ export const Header = (props) => {
 
   return(
     <HeaderDiv>
-      <h1>{ props.title }</h1>
+      <h1>{ props.title } <span className='beta'>BETA</span></h1>
       <label className="switch">
         <input type="checkbox" onClick={themeToggler}></input>
         <span className="slider round"></span>
