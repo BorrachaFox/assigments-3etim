@@ -23,7 +23,7 @@ export const AssigmentList = () => {
   return(
     <AssigmentListDiv>
       <Header>
-        <button>adicionar</button>
+        {/* <button>adicionar</button> */}
       </Header>
 
       {assigments?.map((assigment) => 

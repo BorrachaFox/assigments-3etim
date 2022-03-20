@@ -11,6 +11,10 @@ export const HeaderDiv = styled.header`
 
   margin-bottom: 20px;
 
+  span {
+    font-size: 16px;
+  }
+
   .switch {
     margin-left: auto;
     position: relative;
